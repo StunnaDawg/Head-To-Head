@@ -6,6 +6,15 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
+// store in memory when we use json
+type Athlete struct {
+	Id string //`json:"id"`
+    Name string	//`json:"name"`
+    Age  int //`json:"age"`
+	Sport string //`json:"sport"`	
+	Position string	//`json:"position"`
+
+}
 
 
 func main() {
