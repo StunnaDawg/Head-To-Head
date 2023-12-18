@@ -9,6 +9,11 @@ type ChosenAthleteParam struct {
 	Username string
 }
 
+type AtheleteNameResponse struct {
+	Code int
+
+	Name string
+}
 
 type Athlete struct {
 	Id string //`json:"id"`

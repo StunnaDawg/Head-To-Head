@@ -9,8 +9,8 @@ import (
 func Handler(r *chi.Mux) {
 	r.Use(middleware.StripSlashes)
 
-	r.Route("/chosen", func(route, chi.Router) {
-		router.Use(middlewares.Authorization)
-		router.Get("/athlete", GetFavouriteAthlete)
+	r.Route("/chosen", func(r chi.Router) {
+		r.Use(middlewares.Authorization)
+		r.Get("/athlete", GetFavouriteAthlete)
 	})
 }

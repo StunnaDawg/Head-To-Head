@@ -19,7 +19,7 @@ func GetFavouriteAthlete(w http.ResponseWriter, r *http.Request) {
 
 	if err!= nil {
 		log.Error(err)
-		api.InternalErrorHandler(w)
+		api.InternalErrorHandler(w, err)
 		return
 	}
 
@@ -27,20 +27,20 @@ func GetFavouriteAthlete(w http.ResponseWriter, r *http.Request) {
 	database, err = tools.NewDatabase()
 	if err!= nil {
 		log.Error(err)
-		api.InternalErrorHandler(w)
+		api.InternalErrorHandler(w, err)
 		return
 	}
 
-	var tokenDetails *tools.Athlete
-	tokenDetails = (*database).GetFavouriteAthlete(params.username)
+	var tokenDetails *tools.UsersFavouriteAthleteDetails
+	tokenDetails = (*database).GetFavouriteAthlete(params.Username)
 	if tokenDetails == nil {
 		log.Error(err)
-		api.InternalErrorHandler(w)
+		api.InternalErrorHandler(w, err)
 		return
 	}
 
-	var response = api.UsersFavouriteAthleteDetails{
-		AthleteName: (*tokenDetails).Name,
+	var response = api.AtheleteNameResponse{
+		Name: (*tokenDetails).AthleteName,
 		Code: http.StatusOK,
 	}
 	
@@ -48,7 +48,7 @@ func GetFavouriteAthlete(w http.ResponseWriter, r *http.Request) {
 	err = json.NewEncoder(w).Encode(response)
 	if err != nil {
 		log.Error(err)
-		api.InternalErrorHandler(w)
+		api.InternalErrorHandler(w, err)
 		return
 	}
 }

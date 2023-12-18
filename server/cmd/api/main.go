@@ -10,13 +10,12 @@ import (
 
 func main() {
 
-	log.SetReporterCaller(true)
-	var r * chi.Mux = chi.newRouter()
-	handler.Handlers(r)
+	var r * chi.Mux = chi.NewRouter()
+	handlers.Handler(r)
 
 	fmt.Println("Starting Server")
 
-	err := http.ListenAndServe("localhost:4000")
+	err := http.ListenAndServe("localhost:4000", r)
 
 	if err != nil {
 		log.Error(err)
